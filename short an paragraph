@@ -1,0 +1,69 @@
+#include <iostream>
+#include <string.h>
+#include <vector>
+#include <iomanip>
+
+using namespace std;
+int main() 
+{
+	int count=0;
+	string paragraph;//="once upon a time there was a king and a qween.Both of them were linving in a small city named kattapalli.";
+	getline(cin,paragraph);             /// for command line input till endline
+	for(int i=0;paragraph[i]!=NULL;i++) ///// counting no of spaces 
+	{
+		if((paragraph[i]==32)||(paragraph[i]=='.'))
+		{
+			count++;
+		}
+	}
+	cout<<count<<endl;
+	string s[count];                    //// creating a string of no of words
+	int row=0;int col=0;
+	for(int i=0;paragraph[i]!=NULL;i++)   ///// separating thr words travel till null is encountered 
+	{
+		cout<<paragraph[i];
+		if((paragraph[i]==32)||(paragraph[i]=='.'))   ////checking for spaces and and full stops
+		{
+			col=0;row++;
+		}
+		else
+		{
+			s[row]+=paragraph[i];                       appeding the single word
+		}
+		
+	}
+//	for(int k=0;k<count;k++)
+//	{
+//		cout<<k<<"\t"<<s[k]<<endl;
+//	}
+	for(int i=0;i<count;i++)                  ////// sorting
+	{
+		for(int j=0;j<count-i-1;j++)
+		{
+			int k=0;
+			if(s[j][k]==s[j+1][k])                //// checking for similar letter starting word
+			{
+			do
+			{
+				k++;
+				if(s[j+1][k]==NULL)                 //// checking the end of word
+				{
+					swap(s[j],s[j+1]);break;
+				}
+				else if(s[j][k]==NULL)break;
+				else if(s[j][k]>s[j+1][k])
+				{
+					swap(s[j],s[j+1]);break;
+				}
+			}while((s[j][k]==s[j+1][k]));
+			}
+			else if(s[j][k]>s[j+1][k])swap(s[j],s[j+1]);      sorting the words
+		}
+	}
+	for(int k=0;k<count;k++)
+	{
+		cout<<k<<"\t"<<s[k]<<endl;
+	}
+	cout<<endl<<"end of program";
+    return 0;
+}
