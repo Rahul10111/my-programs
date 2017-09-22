@@ -5,14 +5,14 @@ typedef struct node{
     int val, lh, rh;
     struct node *left, *right;
 }node;
-// Allocates new nodes.
+// Allocates new nodes.   
 node * getNode(int val){
     node *ret = (node*)calloc(1, sizeof(node));
     ret->val = val;
     return ret;
 } 
 int max; // our Diameter.
-//Assign maximum Depth to each node.
+//Assign maximum Depth to each node. in the tree
 int query(node *ptr){
     if(ptr){
         ptr->lh = query(ptr->left);
