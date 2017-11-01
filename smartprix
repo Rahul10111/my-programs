@@ -1,0 +1,136 @@
+Write a program to simulate a keyboard with given keys and their operation. You need to print the final text to STDOUT.
+
+Type of Keys:
+Each key affects the movement of the cursor on editor. The cursor position is identified by row and column.
+
+alpha numeric space => this key inserts their respective symbol at cursors position and shift cursor.
+@ => [CAPS Lock] toggles caps lock, i.e., if CapsLock is 'ON' after this key press it will be 'OFF' and vice versa. Initially CAPS Lock in 'OFF'.
+# => [ENTER/New Line] inserts a new line character at cursor position and shift cursor position.
+< => [LEFT arrow] moves cursor to one step left (if available). If cursor is at the starting of the row, it moves to end of the row above (if available).
+> => [RIGHT arrow] moves cursor to one step right (if available). If cursor is at a row end it moves to starting of the row below (if available).
+/ => [Backspace] deletes one character from the left of the cursor and move cursor one step left. It follows same direction rules as LEFT arrow key (<).
+? => [Down arrow] If cursor is on last row nothing changes. The cursor moves to original column in next row if there are not enough characters in next row, cursor shifts to the end of the new row. Note: If key is pressed continuosly original column will not change with every key press.
+^ => [UP arrow] If cursor is on first row nothing changes. The cursor moves to the original column (current) of the previous row, if there are not enough characters in previous row cursor shifts to the end of the previous row. Note: If key is pressed continuosly original column will not change with every key press.
+
+Example:
+Input: asdf#q#pqr^^23
+Output:
+asd23f
+q
+pqr
+Input:
+One line of input characters (as defined above).
+
+Output:
+The formatted text.
+
+Example 1:
+Input
+asdf1# @qwe^23
+Output
+asdf231
+ QWE
+Example 2:
+Input
+asdf1#@ qwe<<<//23
+Output
+asdf123QWE
+Explanation:
+asdf1 prints asdf1
+asdf1
+# inserts new line character after asdf1
+@ qwe switches caps lock from off to on and inserts QWE
+asdf1
+ QWE
+<<< shifts cursor position 3 position left
+// deletes 2 character (space and new line) from left of Q character
+asdf1QWE
+23 inserts 23 from current cursor position
+asdf123QWE
+
+
+
+
+
+
+question 2
+
+Given a program compile it and print its output to STDOUT.
+
+The given language has 8 types of statements:
+
+ECHO 1 => prints the given number to STDOUT. Eg: ECHO 1 prints 1 to STDOUT
+EXIT => exits the program
+SET a 0 => assign variable a value 0, i.e. equivalent to a = 0
+ADD 1 2 b => add 1(first) and 2(second) and assign its value to b(third), equivalent to b = 1 + 2. Value 3 will be assigned to variable b
+GOTO and LABEL
+LABEL 12
+<statement>
+<statement>
+<statement>
+GOTO 12
+The GOTO statement jumps to corresponding LABEL (defined by argument). The LABEL can occur either before or after GOTO statement.
+
+IF and END
+IF a 10
+<statement>
+<statement>
+<statement>
+END
+If a(first argument) is equal to 10(second argument) then only statements between IF and END will be executed otherwise they will bot be executed.
+
+CONTINUE
+IF a 10
+<statement>
+<statement>
+CONTINUE
+<statement>
+END
+CONTINUE is used inside IF END block. CONTINUE jumps to the corresponding IF statement of the block.
+
+Note:
+All arguments are whole numbers only.
+Variables names can only consist alphabetic[a-z] characters.
+All variables are intially 0. You don't need to SET a variable before using it.
+Example 1
+Input
+SET a 0
+LABEL 100
+ADD a 1 a
+ECHO a
+IF a 5
+EXIT
+END
+GOTO 100
+Output
+1
+2
+3
+4
+5
+Example 2
+Input
+SET a 1
+SET b 2
+SET goal 5
+SET flag 0
+
+IF flag 0
+ADD a b c
+
+IF a goal
+ADD a a a
+SET flag 1
+END
+
+ECHO a
+SET a b
+SET b c
+
+CONTINUE
+END
+Output
+1
+2
+3
+10
